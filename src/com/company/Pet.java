@@ -19,4 +19,11 @@ public class Pet {
     public String getType() {
         return type;
     }
+
+    @Override
+    public String toString() {
+        return
+                type  +  ": " +
+                 name;
+    }
 }

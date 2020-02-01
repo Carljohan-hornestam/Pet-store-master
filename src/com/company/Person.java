@@ -20,4 +20,12 @@ public class Person {
     public int getAge() {
         return age;
     }
+
+    @Override
+    public String toString() {
+        return
+                name + " " + "(" +
+                age + ")" +
+                " owns the animals: " + ownedPets;
+    }
 }
