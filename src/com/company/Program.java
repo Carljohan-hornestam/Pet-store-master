@@ -1,13 +1,18 @@
 package com.company;
 
+
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
+
+
 
 public class Program {
     PetNameGenerator generator = new PetNameGenerator();
     PetStore store = new PetStore(generator);
-    public List<Person> persons = new ArrayList<>();
+    private List<Person> persons = new ArrayList<>();
 
 
     Program(){
@@ -17,6 +22,7 @@ public class Program {
         store.buyPets(persons);
         printResult1();
         printResult2();
+        printResult3();
     }
 
     public void createPersons(){
@@ -44,12 +50,25 @@ public class Program {
     public void printResult1(){
         System.out.println("Result 1");
         persons.stream()
-        .collect(Collectors.toList())
-        .forEach(System.out::println);
-        System.out.println();
+               .collect(Collectors.toList())
+               .forEach(System.out::println);
+        System.out.println("---------------------------------------------------------------------------------------------");
     }
     public void printResult2(){
         System.out.println("Result 2");
+        persons.stream()
+                .sorted(Comparator.comparing(Person::getName))
+                .collect(Collectors.toList())
+                .forEach(System.out::println);
 
+        System.out.println("---------------------------------------------------------------------------------------------");
+    }
+    public void printResult3(){
+        System.out.println("Result 3");
+        persons.stream()
+                .sorted(Comparator.comparing(person -> person.ownedPets.size()))
+                .filter(s -> s.ownedPets.size() > 0)
+                .collect(Collectors.toList())
+                .forEach(System.out::println);
     }
 }
